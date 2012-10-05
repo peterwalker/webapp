@@ -1,0 +1,22 @@
+apply plugin: 'jetty'
+apply plugin: 'war'
+
+group = 'gradle'
+version = '1.0'
+
+repositories {
+   mavenCentral()
+}
+
+dependencies {
+    providedCompile "javax.servlet:servlet-api:2.5"
+    testCompile "junit:junit:4.8.2"
+}
+
+war {
+    from 'src/rootContent' // adds a file-set to the root of the archive
+    webInf { from 'src/additionalWebInf' } // adds a file-set to the WEB-INF dir.
+    webXml = file('src/someWeb.xml') // copies a file to WEB-INF/web.xml
+}
+
+httpPort = 8080
