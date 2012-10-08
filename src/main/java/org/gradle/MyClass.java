@@ -7,7 +7,7 @@ public class MyClass {
     }
     
     public Boolean doBuggy(){
-  //  	return null;
-    	return true;
+    	return null;
+  //  	return true;
     }
 }
