@@ -25,14 +25,6 @@ findbugsMain.reports{
 	xml.enabled false
 }
 
-/*
-findbugs {
-	reports {
-		html = true
-	}
-}
-*/
-
 httpPort = 8080
 stopKey = 'stop'
 stopPort = 8081
