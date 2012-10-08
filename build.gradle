@@ -1,5 +1,6 @@
 apply plugin: 'jetty'
 apply plugin: 'war'
+apply plugin: 'findbugs'
 
 group = 'gradle'
 version = '1.0'
@@ -19,4 +20,19 @@ war {
     webXml = file('src/someWeb.xml') // copies a file to WEB-INF/web.xml
 }
 
+findbugsMain.reports{
+	html.enabled true
+	xml.enabled false
+}
+
+/*
+findbugs {
+	reports {
+		html = true
+	}
+}
+*/
+
 httpPort = 8080
+stopKey = 'stop'
+stopPort = 8081
