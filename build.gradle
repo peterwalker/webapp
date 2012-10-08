@@ -2,7 +2,18 @@ apply plugin: 'jetty'
 apply plugin: 'war'
 apply plugin: 'findbugs'
 
-group = 'gradle'
+buildscript {
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath 'com.mapvine:gradle-cobertura-plugin:1.0'
+	}
+}
+
+apply plugin: 'cobertura'
+
+group = 'org.gradle'
 version = '1.0'
 
 repositories {
@@ -10,8 +21,8 @@ repositories {
 }
 
 dependencies {
-    providedCompile "javax.servlet:servlet-api:2.5"
-    testCompile "junit:junit:4.8.2"
+    providedCompile 'javax.servlet:servlet-api:2.5'
+    testCompile 'junit:junit:4.8.2'
 }
 
 war {
@@ -20,10 +31,17 @@ war {
     webXml = file('src/someWeb.xml') // copies a file to WEB-INF/web.xml
 }
 
+cobertura {
+	format = 'html'
+	includes = ['**/*.java']
+}
+
 findbugsMain.reports{
 	html.enabled true
 	xml.enabled false
 }
+
+check.dependsOn testCoberturaReport
 
 httpPort = 8080
 stopKey = 'stop'
