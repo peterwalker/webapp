@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
-JAVA_HOME="/Library/Java/JavaVirtualMachines/1.7.0.jdk/Contents/Home"
-echo $JAVA_HOME
+
 ##############################################################################
 ##
 ##  Gradle start up script for UN*X
