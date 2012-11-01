@@ -1,18 +1,19 @@
 apply plugin: 'jetty'
 apply plugin: 'war'
-apply plugin: 'findbugs'
 apply from: 'gradle/wrapper.gradle'
 
-buildscript {
-	repositories {
-		mavenCentral()
-	}
-	dependencies {
-		classpath 'com.mapvine:gradle-cobertura-plugin:1.0'
-	}
-}
+//apply plugin: 'findbugs'
+//buildscript {
+//	repositories {
+//		mavenCentral()
+//	}
+//	dependencies {
+//		classpath 'com.mapvine:gradle-cobertura-plugin:1.0'
+//	}
+//}
+//
+//apply plugin: 'cobertura'
 
-apply plugin: 'cobertura'
 group = 'org.gradle'
 version = '1.0'
 
@@ -46,10 +47,11 @@ httpPort = 8080
 stopKey = 'stop'
 stopPort = 8081
 
-task reportResolvedDependencies << {
-	configurations.all { configuration->
-		incoming.resolutionResult.allDependencies { DependencyResult dependencyResult ->
-			println "$configuration.name:$dependencyResult"
-		}
-	}
-}
+//task reportResolvedDependencies << {
+//	configurations.all { configuration->
+//		configuration.files.each{ file ->
+//			println "$configuration.name:$file.absoluteFile"
+//			ant.checksum(file:file.absoluteFile, todir:"$buildDir/checksums")
+//		}
+//	}
+//}
