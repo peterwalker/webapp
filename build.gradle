@@ -1,10 +1,9 @@
 apply plugin: 'jetty'
 apply plugin: 'war'
 apply plugin: 'sonar-runner'
-
+apply plugin: 'findbugs'
 apply from: 'gradle/wrapper.gradle'
 
-apply plugin: 'findbugs'
 buildscript {
 	repositories {
 		mavenCentral()
@@ -13,7 +12,6 @@ buildscript {
 		classpath 'com.mapvine:gradle-cobertura-plugin:1.0'
 	}
 }
-
 apply plugin: 'cobertura'
 
 group = 'org.gradle'
@@ -34,27 +32,25 @@ war {
     webXml = file('src/someWeb.xml') // copies a file to WEB-INF/web.xml
 }
 
+findbugsMain.reports {
+	html.enabled=true
+	xml.enabled=false
+}
+
 cobertura {
-	format 'html'
+	format 'xml'
 	includes = ['**/*.java']
 }
 check.dependsOn testCoberturaReport
 
-findbugsMain.reports{
-	html.enabled true
-	xml.enabled false
+sonarRunner {
+    sonarProperties {
+        property "sonar.java.coveragePlugin", "cobertura"
+		property "sonar.cobertura.reportPath", "${tasks.testCoberturaReport.reportDir}/coverage.xml"
+    }
 }
+tasks.sonarRunner.dependsOn testCoberturaReport
 
 httpPort = 8080
 stopKey = 'stop'
 stopPort = 8081
-
-//build.dependsOn tasks.sonarRunner
-//task reportResolvedDependencies << {
-//	configurations.all { configuration->
-//		configuration.files.each{ file ->
-//			println "$configuration.name:$file.absoluteFile"
-//			ant.checksum(file:file.absoluteFile, todir:"$buildDir/checksums")
-//		}
-//	}
-//}
