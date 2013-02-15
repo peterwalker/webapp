@@ -1,5 +1,7 @@
 apply plugin: 'jetty'
 apply plugin: 'war'
+apply plugin: 'sonar-runner'
+
 apply from: 'gradle/wrapper.gradle'
 
 apply plugin: 'findbugs'
@@ -47,6 +49,7 @@ httpPort = 8080
 stopKey = 'stop'
 stopPort = 8081
 
+//build.dependsOn tasks.sonarRunner
 //task reportResolvedDependencies << {
 //	configurations.all { configuration->
 //		configuration.files.each{ file ->
