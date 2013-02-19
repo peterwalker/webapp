@@ -2,6 +2,8 @@ apply plugin: 'jetty'
 apply plugin: 'war'
 apply plugin: 'sonar-runner'
 apply plugin: 'findbugs'
+apply plugin: 'war'
+apply plugin: 'build-dashboard'
 apply from: 'gradle/wrapper.gradle'
 
 buildscript {
@@ -49,7 +51,8 @@ sonarRunner {
 		property "sonar.cobertura.reportPath", "${tasks.testCoberturaReport.reportDir}/coverage.xml"
     }
 }
-tasks.sonarRunner.dependsOn testCoberturaReport
+buildDashboard.dependsOn check
+build.dependsOn buildDashboard
 
 httpPort = 8080
 stopKey = 'stop'
