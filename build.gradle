@@ -2,19 +2,13 @@ apply plugin: 'jetty'
 apply plugin: 'war'
 apply plugin: 'sonar-runner'
 apply plugin: 'findbugs'
+<<<<<<< HEAD
 apply plugin: 'war'
 apply plugin: 'build-dashboard'
+=======
+apply plugin: 'jacoco'
+>>>>>>> replace cobertura with jacoco
 apply from: 'gradle/wrapper.gradle'
-
-buildscript {
-	repositories {
-		mavenCentral()
-	}
-	dependencies {
-		classpath 'com.mapvine:gradle-cobertura-plugin:1.0'
-	}
-}
-apply plugin: 'cobertura'
 
 group = 'org.gradle'
 version = '1.0'
@@ -39,20 +33,20 @@ findbugsMain.reports {
 	xml.enabled=false
 }
 
-cobertura {
-	format 'xml'
-	includes = ['**/*.java']
-}
-check.dependsOn testCoberturaReport
+check.dependsOn jacocoTestReport
 
 sonarRunner {
     sonarProperties {
-        property "sonar.java.coveragePlugin", "cobertura"
-		property "sonar.cobertura.reportPath", "${tasks.testCoberturaReport.reportDir}/coverage.xml"
+        property "sonar.java.coveragePlugin", "jacoco"
+		property "sonar.jacoco.reportPath", "${buildDir}/jacoco/test.exec"
     }
 }
+<<<<<<< HEAD
 buildDashboard.dependsOn check
 build.dependsOn buildDashboard
+=======
+tasks.sonarRunner.dependsOn jacocoTestReport
+>>>>>>> replace cobertura with jacoco
 
 httpPort = 8080
 stopKey = 'stop'
