@@ -2,12 +2,7 @@ apply plugin: 'jetty'
 apply plugin: 'war'
 apply plugin: 'sonar-runner'
 apply plugin: 'findbugs'
-<<<<<<< HEAD
-apply plugin: 'war'
-apply plugin: 'build-dashboard'
-=======
 apply plugin: 'jacoco'
->>>>>>> replace cobertura with jacoco
 apply from: 'gradle/wrapper.gradle'
 
 group = 'org.gradle'
@@ -41,12 +36,8 @@ sonarRunner {
 		property "sonar.jacoco.reportPath", "${buildDir}/jacoco/test.exec"
     }
 }
-<<<<<<< HEAD
-buildDashboard.dependsOn check
-build.dependsOn buildDashboard
-=======
+
 tasks.sonarRunner.dependsOn jacocoTestReport
->>>>>>> replace cobertura with jacoco
 
 httpPort = 8080
 stopKey = 'stop'
