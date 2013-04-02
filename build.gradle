@@ -29,14 +29,6 @@ findbugsMain.reports {
 }
 
 check.dependsOn jacocoTestReport
-
-sonarRunner {
-    sonarProperties {
-        property "sonar.java.coveragePlugin", "jacoco"
-		property "sonar.jacoco.reportPath", "${buildDir}/jacoco/test.exec"
-    }
-}
-
 tasks.sonarRunner.dependsOn jacocoTestReport
 
 httpPort = 8080
