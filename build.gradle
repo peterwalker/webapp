@@ -3,6 +3,7 @@ apply plugin: 'war'
 apply plugin: 'sonar-runner'
 apply plugin: 'findbugs'
 apply plugin: 'jacoco'
+apply plugin: 'build-dashboard'
 apply from: 'gradle/wrapper.gradle'
 
 group = 'org.gradle'
@@ -30,6 +31,7 @@ findbugsMain.reports {
 
 check.dependsOn jacocoTestReport
 tasks.sonarRunner.dependsOn jacocoTestReport
+build.dependsOn buildDashboard
 
 httpPort = 8080
 stopKey = 'stop'
